@@ -4,12 +4,14 @@ import { apiService } from "./../service/ApiService";
 class VideoSingle extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    // console.log(props);
     
   }
   getId = () => {
-    console.log(this.props.index);
+
     this.props.sideClickList(this.props.index)
+   
+
   };
 
   render() {

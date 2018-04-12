@@ -10,7 +10,7 @@ class VideoList extends Component {
     
     
     render(){
-        console.log(this.props.videos.id);
+        // console.log(this.props.videos.id);
         return(
           <div>
                 {this.props.videos.map((video, index) =>{ 
