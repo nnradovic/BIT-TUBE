@@ -13,8 +13,9 @@ class VideoList extends Component {
         console.log(this.props.videos.id);
         return(
           <div>
-                {this.props.videos.map(video =>{ 
-                return <VideoSingle props={video}/>
+                {this.props.videos.map((video, index) =>{ 
+                    
+                return <VideoSingle props={video}  index={index}  sideClickList = {this.props.sideClickApp} />
                 })}
           </div>
       )

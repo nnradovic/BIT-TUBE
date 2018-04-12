@@ -24,6 +24,15 @@ class App extends Component {
   });
 }
  
+sideClick = (id)=>{
+  
+    this.setState({
+      selectedVideo: this.state.videos[id]
+    });
+  
+}
+
+
 
   onHandleChange = searchInput => {
     apiService.getVideo(searchInput).then(query => {
@@ -49,7 +58,7 @@ class App extends Component {
               {this.state.selectedVideo && <VideoPlayer selectedVideo={this.state.selectedVideo} />}
             </div>
             <div className="col m2 push-m2">
-            <VideoList videos={this.state.videos} />
+            <VideoList videos={this.state.videos} sideClickApp={this.sideClick}/>
             </div>
           </div>
         </div>

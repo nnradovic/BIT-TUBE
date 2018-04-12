@@ -11,9 +11,7 @@ class ApiService {
 
 
   
-     getVideo = (searchInput) =>{
-       
-         
+     getVideo = (searchInput) =>{ 
         return fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${searchInput}&type=video&key=AIzaSyChh0yi4FwvMQtj-Qtx2_5q_0xaGjoR-1M`)
         .then(response=> response.json())
         .then(videos =>videos.items.map(video=>new Video(video))
