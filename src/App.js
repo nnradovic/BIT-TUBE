@@ -10,9 +10,20 @@ class App extends Component {
     super(props);
     this.state = {
       selectedVideo: null,
-      videos: []
+      videos: [],
+      defaultVideos:'javascript'
     };
   }  
+
+ componentDidMount(){
+  apiService.getVideo(this.state.defaultVideos).then(videos => {
+    this.setState({
+      videos: videos,
+      selectedVideo: videos[0]
+    });
+  });
+}
+ 
 
   onHandleChange = searchInput => {
     apiService.getVideo(searchInput).then(query => {
@@ -24,6 +35,11 @@ class App extends Component {
   };
 
   render() {
+    if(this.state.videos.length === 0){
+      return <h1>Loading...</h1>
+    }
+  console.log(this.state.videos);
+  
     return (
       <Fragment>
         <Search props={this.onHandleChange} />
@@ -33,7 +49,7 @@ class App extends Component {
               {this.state.selectedVideo && <VideoPlayer selectedVideo={this.state.selectedVideo} />}
             </div>
             <div className="col m2 push-m2">
-            {this.state.videos && <VideoList videos={this.state.videos} />}
+            <VideoList videos={this.state.videos} />
             </div>
           </div>
         </div>

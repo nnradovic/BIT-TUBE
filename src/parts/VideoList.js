@@ -5,21 +5,15 @@ import VideoSingle from './VideoSingle'
 
 class VideoList extends Component {
     
-    constructor(props) {
-        
-        super(props);
-        console.log(props.videos);
-    this.state = {
-        videos : [],
-    };
-}
 
-
-
-  render(){
-      return(
+    
+    
+    
+    render(){
+        console.log(this.props.videos.id);
+        return(
           <div>
-                {this.state.videos.slice(1,this.state.videos.length).map(video =>{ 
+                {this.props.videos.map(video =>{ 
                 return <VideoSingle props={video}/>
                 })}
           </div>
