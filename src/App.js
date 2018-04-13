@@ -5,6 +5,7 @@ import VideoList from "./parts/VideoList";
 import Search from "./parts/Search";
 import { apiService } from "./service/ApiService";
 import VideoHistory from './parts/VideoHistory'
+import debounce from 'lodash/debounce'
 class App extends Component {
   constructor(props) {
     super(props);
@@ -12,8 +13,8 @@ class App extends Component {
       selectedVideo: null,
       videos: [],
       defaultVideos: "javascript",
-      history:[]
-
+      history:[],
+      
     };
   }
 // Loading on beginig 5 default videos
@@ -41,16 +42,18 @@ class App extends Component {
       selectedVideo: query[0]
     });
   });
+  window.scrollTo(0,0)
  }
 //Callback function for search
-  onHandleChange = searchInput => {
+  
+  onHandleChange = debounce(((searchInput) => {
     apiService.getVideo(searchInput).then(query => {
       this.setState({
         videos: query,
         selectedVideo: query[0]
-      });
-    });
-  };
+      })
+    })
+  }) ,1000);
 
   render() {
     if (this.state.videos.length === 0) {
