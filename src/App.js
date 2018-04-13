@@ -16,7 +16,7 @@ class App extends Component {
 
     };
   }
-
+// Loading on beginig 5 default videos
   componentDidMount() {
     apiService.getVideo(this.state.defaultVideos).then(videos => {
       this.setState({
@@ -25,18 +25,24 @@ class App extends Component {
       });
     });
   }
-
-  sideClick = id => {
-    
+//Side click on image and set history image
+  sideClick = id => { 
     this.state.history.push(this.state.videos[id])
-
     this.setState({
       selectedVideo: this.state.videos[id],
-      
     });
     
   }
 
+  //Start from history
+ historyClick = title =>{
+  apiService.getVideo(title).then(query => {
+    this.setState({
+      selectedVideo: query[0]
+    });
+  });
+ }
+//Callback function for search
   onHandleChange = searchInput => {
     apiService.getVideo(searchInput).then(query => {
       this.setState({
@@ -48,7 +54,7 @@ class App extends Component {
 
   render() {
     if (this.state.videos.length === 0) {
-      return <h1>Loading...</h1>;
+      return <h4>Loading...</h4>;
     }
   
 
@@ -62,7 +68,7 @@ class App extends Component {
                 <VideoPlayer selectedVideo={this.state.selectedVideo} />
               )}
             </div>
-            <div className="col m2 push-m2">
+            <div className="col m2 push-m3">
               <VideoList
                 videos={this.state.videos}
                 sideClickApp={this.sideClick}
@@ -71,13 +77,11 @@ class App extends Component {
           </div>
           <div className="row">
             <h4> History </h4>
-            <p>Clear History </p>
-            
-              <VideoHistory
-                history={this.state.history}
-                // sideClickApp={this.sideClick}
-              />
-           
+
+
+              <VideoHistory history={this.state.history} historyClickApp={this.historyClick}/> 
+               
+ 
           </div>
         </div>
       </Fragment>

@@ -1,25 +1,27 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Video from "./../entites/Video";
 import { apiService } from "./../service/ApiService";
-import VideoSingle from './VideoSingle'
+import VideoSingleHistory from './VideoSingleHistory'
 
 class VideoHistory extends Component {
     constructor(props){
         super(props)
+        console.log(props);
+        
     }
 
     
     
     
     render(){
-        console.log(this.props.history);
+        console.log(this.props);
         return(
-          <div className="col-m3">
-
-
-               { this.props.history.reverse().map((video) =>{ return <VideoSingle props={video}   />
+        <Fragment>
+         
+               { this.props.history.reverse().map((video) =>{ return <VideoSingleHistory props={video} historyClickHistory={this.props.historyClickApp}   />
                     })} 
-          </div>
+       
+       </Fragment>
       )
   }
 
